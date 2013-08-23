@@ -1,0 +1,6 @@
+Django==1.4
+mailer
+django_facebook
+django_socialregistration
+django-markup
+django-tastypie

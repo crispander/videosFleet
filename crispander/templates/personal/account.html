@@ -1,0 +1,253 @@
+{% extends "base.html"%}
+
+{% comment %}
+	{% block barmenu %}
+	{% endblock barmenu %}
+{% endcomment %}
+
+{% block stylepag %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/personal/account.css" type="text/css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/personal/comments.css" type="text/css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/vader/jquery-ui.css" />
+{% endblock stylepag %}
+
+{% block scriptsJ %}
+<!--  añadiendo el reproductor de audio y video-->
+<script src="{{ STATIC_URL }}js/build/mediaelement-and-player.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}js/build/mediaelementplayer.min.css" />
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/swfobject.js"></script>
+<script src="{{ STATIC_URL }}js/personal/account.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/personal/send_comment.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://a.vimeocdn.com/js/froogaloop2.min.js" type="text/javascript"></script>
+
+
+<script>
+	{% if data_user.get_profile.get_imagen %}
+		img_user="{{ data_user.get_profile.get_imagen.imagen.url }}";
+	{% else %}
+		img_user="{{ STATIC_URL }}images/sinimagen.png";
+	{% endif %}
+</script>
+{% endblock scriptsJ %}
+
+{% block content %}
+    <input type="hidden" value="collection" id="type_object">
+    {% if user.is_authenticated %}
+    <input type="hidden" value="{{ user.id }}" id="my_current_user">
+    <input type="hidden" value="{{ user.first_name }}" id="my_current_user_name">
+    {% endif %}
+	{% if not filter %}
+<div id="center_block">
+		<div id="block_data_user">
+		<table  width="100%">
+		<tr>
+			<td rowspan="5" width="40%">
+			{% if data_user.get_profile.get_imagen %}
+				<img src="{{ data_user.get_profile.get_imagen.imagen.url }}" height="100" alt="{{ i.first_name }}">
+			{% else %}
+				<img src="{{ STATIC_URL }}images/sinimagen.png" height="100" alt="{{ i.first_name }}">
+			{% endif %}
+			</td>
+			<td>
+				<span class="icon-user">&nbsp;&nbsp;<b>{{ data_user.username }}</b></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="icon-users">&nbsp;&nbsp;<b>Seguidores :</b> {{ data_user.get_profile.get_my_follows }}</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="icon-earth">&nbsp;&nbsp;<b>Pais :</b> Colombia</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="icon-earth">&nbsp;&nbsp;<b>Ciudad :</b> Medellin</span>
+			</td>
+		</tr>
+				{% if user.is_authenticated %}
+				{% if user.pk == data_user.pk %}
+		<tr>
+			<td>
+				 <span class="icon-plus" onclick="crear_name_collection();" style="cursor:pointer">&nbsp;Crear colección</span>
+
+			</td>
+		</tr>
+				{% endif %}
+				{% endif %}
+		</table>
+			<div class="cleaner"></div>
+		</div>
+	{% endif %}
+	<div class="cleaner"></div>
+    <!--
+    {% cycle 'style1block' 'style2block' as rowcolors %}
+    -->
+
+	{% if not filter %}
+		<div id="total_collections">
+			{% for i in data_user.get_profile.get_name_collection %}
+
+			<div class="block_collection" id="name_collection_{{ i.id }}">
+				<span>
+					<span class="icon-tree"><b style="font-size:1.2em;font-family:trebuchet ms, arial;color:#39AECF;">&nbsp;&nbsp;{{ i.name }}&nbsp;</b><small>{{ forloop.counter }}</small></span>
+					<br /><span>Modif: {{ i.get_modified_date.modified }}</span>
+					<br />
+					<div class="toolsbar_by_collection">
+					<span class="icon-play-2" onclick="document.location.href='/home/account/{{ data_user.id }}?collecion={{ i.id }}'">&nbsp;&nbsp;Todo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-shuffle" >&nbsp;&nbsp;Aleatorio</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-contract" onclick="toggle_hidden_collections(this);">&nbsp;&nbsp;Ocultar</span>
+					</div>
+				</span>
+					<div class="content_all_carpets">
+						{% for x in i.get_collection  %}
+								<a class="see_video" id="collection_n{{ x.id }}"><div class="{% cycle rowcolors %}"><div class="image"><img src="{% if x.page.foto %}{{ x.page.foto }}{% else %}{{ STATIC_URL }}images/video.png{% endif %}" height="60" /></div><input type="hidden" value="{{ x.id }}" class="number_collection" /><span class="text">{{ x.name }}</span><small>{{ forloop.counter }}</small></div></a>
+								
+								<script type="text/javascript">
+									 n = array_reproductores.push("{{ x.id }}");
+									 index_by_id["collection_n{{ x.id }}"] = ( n - 1)
+								</script>
+						{% endfor %}
+					</div>
+					
+					<br />
+					|&nbsp; &nbsp; <span class="icon-folder-open">&nbsp;&nbsp;Total: {{ i.get_number_collection }}</span>&nbsp; &nbsp; |&nbsp; &nbsp; 
+					<span style="cursor:pointer" class="icon-minus" onclick="delete_name_collection(this)" aria-hidden="{{ i.id }}">&nbsp;&nbsp;Eliminar</span>&nbsp; &nbsp; |
+			</div>
+			{% comment %}
+			esta funcion se utiliza para saber si hay datos de colleciones para saber si se muestran en el momento esta comentariada.
+				{% if i.get_number_collection != 0 %}
+				{% endif %}
+			{% endcomment %}
+			{% endfor %}
+			
+		</div>
+	{% else %}
+		<div id="total_collections">
+			<div class="block_collection" id="name_collection_{{ name_collection.id }}">
+				<span>
+					<span class="icon-tree"><b style="font-size:1.2em;font-family:trebuchet ms, arial;color:#39AECF;">&nbsp;&nbsp;{{ name_collection.name }}&nbsp;</b></span>
+					<br /><span>Modif: {{ name_collection.get_modified_date.modified }}</span>
+					<br />
+					<div class="toolsbar_by_collection">
+					<span class="icon-play-2">&nbsp;&nbsp;Todo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-shuffle" >&nbsp;&nbsp;Aleatorio</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-contract" onclick="toggle_hidden_collections(this);">&nbsp;&nbsp;Ocultar</span>
+					</div>
+				</span>
+					<div class="content_all_carpets">
+						{% for x in name_collection.get_collection  %}
+								<a class="see_video" id="collection_n{{ x.id }}"><div class="{% cycle rowcolors %}"><div class="image"><img src="{% if x.page.foto %}{{ x.page.foto }}{% else %}{{ STATIC_URL }}images/video.png{% endif %}" height="60" /></div><input type="hidden" value="{{ x.id }}" class="number_collection" /><span class="text">{{ x.name }}</span><small>{{ forloop.counter }}</small></div></a>
+								
+								<script type="text/javascript">
+									 n = array_reproductores.push("{{ x.id }}");
+									 index_by_id["collection_n{{ x.id }}"] = ( n - 1)
+								</script>
+						{% empty %}
+						<a onclick="window.top.location.href = '/';">Sin Archivos de colección</a>
+						{% endfor %}
+					</div>
+					
+					<br />
+					|&nbsp; &nbsp; <span class="icon-folder-open">&nbsp;&nbsp;Total: {{ name_collection.get_number_collection }}</span>&nbsp; &nbsp; |&nbsp; &nbsp; 
+					<span style="cursor:pointer" class="icon-minus" onclick="delete_name_collection(this)" aria-hidden="{{ name_collection.id }}">&nbsp;&nbsp;Eliminar</span>&nbsp; &nbsp; |
+			</div>
+		</div>
+	{% endif %}
+
+	
+    <div id="main_expo">
+		<div id="barra_herramientas">
+			<span class="icon-backward" onclick="play_before()">&nbsp;Anterior</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-forward" onclick="play_after();">&nbsp;Siguiente</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-loop" onclick="toggle_play_all();">&nbsp;Automatico</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-shuffle" onclick="toggle_play_all();">&nbsp;Aleatorio</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-play-2" onclick="document.location.href='/home/account/{{ data_user.id }}/'">&nbsp;Todo</span>
+		</div>
+		<!--<span onclick="check();" id="button_close" class="icon-cancel-circle">&nbsp;Limpiar</span><br>-->
+        <div id="block_expo">
+        </div>
+        <div id="block_expo_meo">
+        </div>
+		<div id="block_details">
+			<div>
+				{% if user.is_authenticated %}
+					{% if user.pk == data_user.pk %}
+					 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-minus" id="delete_value" aria-hidden="" onclick="delete_collection(this)">&nbsp;Eliminar</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+					 <span class="icon-pencil" onclick="edite_collection(this)">&nbsp;Editar</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+					{% endif %}
+				{% endif %}
+				 <span class="icon-location-2" onclick="info_collection(this)">&nbsp;Información</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+				 <span class="icon-bubble" onclick="comment_collection(this)">&nbsp;Comentarios</span>
+			 </div>
+		</div>
+        <div id="description_expo">
+			<div class="info">
+				
+			</div>
+        </div>
+		<div id="edit_expo">
+			<div>
+				<span>Nombre colección</span><br />
+				<input type="text" id="edit_name">
+				
+				<br />
+				<br />
+				<br />
+				<span>Cambiar ubicación de la colección</span><br />
+				
+				<div id="selText" style="border:1px solid gray;border-radius:5px;width:80%;padding:4px;margin:auto;">&nbsp;</div><br />
+				<div id="select_collection">
+					<select size="4" id="select_name_collections">
+						{% for i in data_user.get_profile.get_name_collection %}
+							<option id="option_{{ i.id }}" value="{{ i.id }}">{{ i.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				
+				<br /><br />
+				<span>Comentario de la Colección </span><br />
+				<input type="text" id="edit_comment">
+				<br /><br />
+				<span class="icon-pencil" onclick="send_edite_collection()">&nbsp;&nbsp;Editar</span>
+				
+				<br /><br /><hr />
+				<div class="block_mas">
+					<span>Añadir Nueva Carpeta </span><br />
+					<input type="text" id="add_collection_form">
+					<br /><br />
+					<span class="icon-folder" onclick="add_namecollection()">&nbsp;&nbsp;Crear</span>
+				</div>
+			</div>
+        </div>
+		<div id="info_expo">
+			<div id="info_expo_content">
+			
+			</div>
+        </div>
+    </div>
+	<div class="cleaner"></div>
+</div>
+
+   
+   <!--
+   <iframe id="sc-widget" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/users/1539950/favorites" width="100%" height="465" scrolling="no" frameborder="no"></iframe>
+<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+<script type="text/javascript">
+  (function(){
+    var widgetIframe = document.getElementById('sc-widget'),
+        widget       = SC.Widget(widgetIframe);
+
+    widget.bind(SC.Widget.Events.READY, function() {
+      widget.bind(SC.Widget.Events.PLAY, function() {
+		window.console.log("inicio");
+      });
+ 
+       widget.bind(SC.Widget.Events.FINISH, function() {
+        window.console.log("fin");
+      });
+	  
+    });
+
+  }());
+</script>
+-->
+<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+	<div class="cleaner"></div>
+{% endblock content %}

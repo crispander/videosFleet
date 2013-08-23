@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block stylepag %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/personal/config.css" type="text/css">
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}js/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css" />
+{% endblock stylepag %}
+
+
+{% block scriptsJ %}
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}js/personal/config.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.pack.js"></script>
+	<script src="{{ STATIC_URL }}js/marquee/gradient.js" language="JavaScript"></script>
+{% endblock scriptsJ %}
+
+{% block content %}
+<div id="menu_configuration">
+    <a class="button_config" aria-hidden="#tres" onclick="go(this)"><span class="icon-user">&nbsp;&nbsp;DATOS PERSONALES</span></a>
+	<a class="button_config" aria-hidden="#ocho" onclick="go(this)"><span class="icon-user">&nbsp;&nbsp;INTERESES</span></a>
+	<a class="button_config" aria-hidden="#dos" onclick="go(this)"><span class="icon-picture">&nbsp;&nbsp;IMAGEN PERFIL</span></a>
+    <a class="button_config" aria-hidden="#seis" onclick="go(this)"><span class="icon-key">&nbsp;&nbsp;CAMBIO DE CONTRASEÑA</span></a>
+    <a class="button_config" aria-hidden="#cuatro" onclick="go(this)"><span class="icon-equalizer">&nbsp;&nbsp;PREFERENCIAS</span></a>
+    <a class="button_config" aria-hidden="#cinco" onclick="go(this)"><span class="icon-user-2">&nbsp;&nbsp;SEGURIDAD</span></a>
+	<a class="button_config" aria-hidden="#siete" onclick="go(this)"><span class="icon-user-2">&nbsp;&nbsp;ELIMINAR CUENTA</span></a>
+	<a class="button_config" href="/"><span class="icon-exit">&nbsp;&nbsp;SALIR</span></a>
+</div>
+
+<div id="content_configuration">
+    <div class="block_config">
+        <a id="tres" class="title_config">DATOS PERSONALES</a><br>
+
+        <fieldset id="registrousuario">
+            <form method="post" action="/account/edit_user/{{ data_user.id }}/">
+            <legend>EDITE SU USUARIO</legend>
+            <label for="user">Primer Nombre:</label>
+            <input class="texto" name="firstname" type="text" size="20" value="{{ data_user.first_name }}" required maxlength="50"/>
+            <label for="pass">Segundo Nombre:</label>
+            <input class="texto" name="lastname" type="text" size="20" value="{{ data_user.last_name }}" maxlength="50"/>
+            <label for="pass">E-mail:</label>
+            <input class="texto" name="email" type="email" size="20" value="{{ data_user.email }}" required maxlength="100"/>
+            <label for="pass">Pais:</label>
+            <input class="texto" name="country" type="text" size="20" value="{{ data_user.get_profile.country }}" required maxlength="100"/>
+            <label for="pass">Genero:</label>
+            <div class="div_radio">
+                
+                <input type="radio" name="genere" value="male" {% if data_user.get_profile.genere == "male" %}checked{% endif %}> Male<br>
+                <input type="radio" name="genere" value="female" {% if data_user.get_profile.genere == "female" %}checked{% endif %}> Female
+            </div>
+            <label>Tipo de Cuenta</label>
+            <input class="texto" name="type_c" type="text" size="20" value="{{ data_user.get_profile.api }}" disabled />
+			<input type="hidden" name="url" value="{{ request.path }}" id="set_url" />
+            <label for="pass">Descripción:</label> 
+            <textarea class="areadetexto" name="description" cols="26" rows="3" maxlength="800">{{ data_user.get_profile.comment }}</textarea> 
+            <br /> 
+            {% csrf_token %}
+            <input class="botonenviar" name="insert" type="submit" value="Enviar" class="enviar"/> 
+            </form> 
+        </fieldset>
+    </div>
+	
+	<div class="block_config">
+        <a id="ocho" class="title_config">INTERESES</a><br>
+		GENEROS PREFERIDOS
+    </div>
+	
+    <div class="block_config" id="config_image">
+        <a id="dos" class="title_config">IMAGEN PERFIL</a><br>
+        <div class="bloque" id="block_within_foto">
+            {% if data_user.get_profile.get_imagen %}
+            <img src="{{ data_user.get_profile.get_imagen.imagen.url }}" alt="imagen personal" width="200">
+            {% else %}
+            <img src="{{ STATIC_URL }}images/sinimagen.png" alt="imagen personal" width="200">
+            {% endif %}
+        </div>
+        
+        <div class="bloque">
+        <div id="progressbar"><div class="progress-label"></div></div><br>
+        <form enctype="multipart/form-data" action="/home/upload/{{ data_user.id }}/" method="post">
+            <input type="hidden" value="/home/upload/{{ data_user.id }}/" id="url_file">
+            <input type="file" name="miimagen" id="file_imagen" /><br>
+            {% csrf_token %}
+        </form>
+        </div>
+        <div class="cleaner"></div>
+    </div>
+
+
+    <div class="block_config">
+        <a id="seis" class="title_config">CAMBIO DE CONTRASEÑA</a><br>
+		<div id="message_set_password">
+		
+		</div>
+		<fieldset id="registrousuario">
+            <form method="post" action="/account/edit_password/{{ data_user.id }}/" onsubmit="return set_password('{{ data_user.id }}', this);">
+            <legend>Cambio de contrseña</legend>
+            <label for="user">Clave actual</label>
+            <input class="texto" name="passw_before" id="passw_before" type="password" size="20"  required maxlength="50"/>
+            <label for="pass">Clave nueva:</label>
+            <input class="texto" name="passw_after" id="passw_after" type="password" size="20" required maxlength="50"/>
+			<input type="hidden" name="url" value="{{ request.path }}" id="set_url2" />
+            <br /> 
+            {% csrf_token %}
+            <input class="botonenviar" name="insert" type="submit" value="Enviar" class="enviar"/> 
+            </form> 
+        </fieldset>
+    </div>
+    <div class="block_config">
+        <a id="cuatro" class="title_config">PREFERENCIAS</a><br>
+    </div>
+    <div class="block_config">
+        <a id="cinco" class="title_config">SEGURIDAD</a><br>
+		VER IMAGENES<BR>
+		VER DESCRIPCION<BR>
+		VER PAIS<BR>
+		MOSTRAR COLLECIONES<BR>
+		MOSTRAR SEXO<BR>
+    </div>
+    <div class="block_config">
+        <a id="siete" class="title_config">ELIMINAR CUENTA</a><br>
+		Tu cuenta no se eliminara, solo pasara de activa a inactiva.
+    </div>
+
+</div>
+
+<script>
+document.getElementById("set_url").value = window.location.href;
+document.getElementById("set_url2").value = window.location.href;
+</script>
+		
+<div class="cleaner"></div>
+{% endblock content %}

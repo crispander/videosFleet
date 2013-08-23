@@ -1,0 +1,15 @@
+Django==1.5.2
+distribute==0.6.34
+django-toolbelt==0.0.1
+django-markup
+simple-json
+mailer
+gdata
+Django==1.5
+dj-database-url==0.2.1
+psycopg2==2.4.6
+gunicorn==0.17.2
+django-tastypie
+-e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
+vimeo
+soundcloud

@@ -1,0 +1,168 @@
+{% extends "base.html"%}
+{% load extra_account %}
+
+{% block stylepag %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/personal/collection.css" type="text/css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/personal/comments.css" type="text/css">
+{% endblock stylepag %}
+
+{% block scriptsJ %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/swfobject.js"></script>
+<script src="{{ STATIC_URL }}js/personal/collectionyou.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/personal/feed.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/personal/on_subscription.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/personal/send_comment.js" type="text/javascript"></script>
+<script>
+    {% if filter_collections.has_next %}
+        var current_request = "/home/super/api/none/?page=2&limit=3&by_collection=" + {{ collections.id }};
+    {% else %}
+        var current_request = null;
+    {% endif %}
+        var current_page = null;
+</script>
+{% endblock scriptsJ %}
+    
+{% block content %}
+    <input type="hidden" value="collection" id="type_object">
+    {% if user.is_authenticated %}
+    <input type="hidden" value="{{ user.id }}" id="my_current_user">
+    <input type="hidden" value="{{ user.first_name }}" id="my_current_user_name">
+    {% endif %}
+    <h2>Nombre de Colección: {{ collections.name }}</h2>
+    
+    <div id="block_feed">
+    {% for i in filter_collections.object_list %}
+    <div class="block_collection">
+        <div class="header_feed">
+            <span>{{ i.name }}</span>
+        </div>
+        
+        <div class="bar_rigth_collection">
+        <a class="buttom_close" onclick="check();">X</a>
+        {% if i.page.body %}
+            <a class="see_video" href="/"><input type="hidden" value="http://player.vimeo.com/video/{{ i.page.video }}?badge=0&autoplay=1"><input type="hidden" value="div{{ i.id }}"><input type="hidden" value="false" class="cl_state">P</a>
+        {% else %}
+            <a class="see_video" href="/"><input type="hidden" value="{{ i.page.video }}"><input type="hidden" value="div{{ i.id }}"><input type="hidden" value="false" class="cl_state">P</a>
+        {% endif %}
+        <a href="/home/desc_collection/{{ i.id }}/">I</a>
+        </div>
+        
+        <div id="div{{ i.id }}" ></div>
+        <div class="hidden_foto_play">
+        {% if i.page.body %}
+            <a class="see_video" href="/"><input type="hidden" value="http://player.vimeo.com/video/{{ i.page.video }}?badge=0&autoplay=1"><input type="hidden" value="div{{ i.id }}"><input type="hidden" value="false" class="cl_state"><img height="150" src="{{ i.page.foto }}"><div class="buttom_play"></div><p class="decoration_ver">ver</p></a>
+        {% else %}
+            <a class="see_video" href="/"><input type="hidden" value="{{ i.page.video }}"><input type="hidden" value="div{{ i.id }}"><input type="hidden" value="false" class="cl_state"><img height="150"  src="{{ i.page.foto }}"><div class="buttom_play"></div><p class="decoration_ver">ver</p></a>
+        {% endif %}
+        
+        <div class="description_feed">
+            <span><span>Visitas</span> <span>{{ i.page.get_visits }}</span></span><br>
+            
+                {% if i|args:user.id|call:"on_like" == "like" %}
+                    <div onclick="on_like_toggle(this, true, {{ i.id }});" class="buttoms_of_quals" style="box-shadow:0 0 10px 4px red;">
+                        me gusta
+                        <input type="hidden" value="false" class="state_like" >
+                    </div>{{ i.get_number_likes }}
+                {% else %}
+                    <div onclick="on_like_toggle(this, true, {{ i.id }});" class="buttoms_of_quals">
+                        me gusta<input type="hidden" value="true" class="state_like">
+                    </div>{{ i.get_number_likes }}
+                {% endif %}
+                
+                {% if i|args:user.id|call:"on_like" == "likeno" %}
+                    <div onclick="on_like_toggle(this, false, {{ i.id }});" class="buttoms_of_quals" style="box-shadow:0 0 10px 4px red;">
+                        no me gusta<input type="hidden" value="false" class="state_like">
+                    </div>{{ i.get_number_nolikes }}
+                {% else %}
+                    <div onclick="on_like_toggle(this, false, {{ i.id }});" class="buttoms_of_quals">
+                        no me gusta<input type="hidden" value="true" class="state_like">
+                    </div>{{ i.get_number_nolikes }}
+                {% endif %}
+                                
+        </div>
+        <div class="cleaner"></div>
+         </div>
+         
+         <div class="footer_feed">
+        {% if i.comment %}
+            <span>{{ i.comment }}</span>
+        {% endif %}
+        </div>
+        
+            <div class="layer_comentarios">
+                <!-- zona de comentarios -->
+                <div>
+                    <span class="chain">Comentarios</span><br>
+                    {% if user.get_profile.imagen %}
+                        <img src="{{ user.get_profile.imagen }}" height="50px" class="image_comment">
+                    {% else %}
+                        <img src="{{ STATIC_URL }}images/sinimagen.png" height="50px" class="image_comment">
+                    {% endif %}
+                    <textarea class="comment" maxlength="600" required placeholder="Comentario"></textarea>
+                    <input type="hidden" value="{{ i.id }}" class="hidden_comment">
+                    <a class="buttom_send_comment">submit</a>
+                </div>
+                
+                <div class="block_comments">
+                    {% for x in i.get_main_comments.0 %}
+                    <div class="unt_comment">
+                        <div class="block_image_comment"> 
+                    {% if x.user.get_profile.imagen %}
+                        <img src="{{ x.user.get_profile.imagen }}" height="50px">
+                    {% else %}
+                        <img src="{{ STATIC_URL }}images/sinimagen.png" height="50px">
+                    {% endif %}
+                        </div>
+                    
+                         <div class="block_description_comments">
+                            <span class="autor">{{ x.user.first_name }} </span> - <span class="fecha">{{ x.date }} </span>
+                         </div>
+                            
+                          <div class="block_qualify_comments">
+                             {% if x|args:user.id|call:"on_like" == "like" %}
+                             <div onclick="send_qualify_comment(this, true, {{ x.id }});" class="buttom_qualify_comments" style="box-shadow:0 0 10px 4px red;">fine<div class="buttom_data_qualify">{{ x.get_raitings.0 }}</div>
+                                <input type="hidden" value="false" class="state_like">
+                             </div>
+                             {% else %}
+                             <div onclick="send_qualify_comment(this, true, {{ x.id }});" class="buttom_qualify_comments">fine<div class="buttom_data_qualify">{{ x.get_raitings.0 }}</div>
+                                <input type="hidden" value="true" class="state_like">
+                             </div>
+                             {% endif %}
+                             {% if x|args:user.id|call:"on_like" == "likeno" %}
+                             <div onclick="send_qualify_comment(this, false, {{ x.id }});" class="buttom_qualify_comments" style="box-shadow:0 0 10px 4px red;">bad<div class="buttom_data_qualify">{{ x.get_raitings.1 }}</div>
+                                <input type="hidden" value="false" class="state_like">
+                             </div>
+                             {% else %}
+                             <div onclick="send_qualify_comment(this, false, {{ x.id }});" class="buttom_qualify_comments" >bad<div class="buttom_data_qualify">{{ x.get_raitings.1 }}</div>
+                                <input type="hidden" value="true" class="state_like">
+                             </div>
+                             {% endif %}
+                         </div>
+                         <br>
+                     
+                         <div class="block_content_comment">
+                            <span>{{ x.comment }}</span>
+                         </div>
+                         <input type="hidden" value="{{ x.get_raitings.2 }}">
+                         <div class="cleaner" ></div>
+                         <hr>
+                     
+                    </div>
+                {% empty %}
+                    <div class="unt_comment">
+                    </div>
+                {% endfor %}
+                    {% if i.get_main_comments.1 %}
+                        <div class="button_get_more_comments" onclick="get_more_comments(this);">
+                            + commentarios
+                            <input type="hidden" class="comments_data_url" value='{{ i.get_main_comments.2 }}'>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+                
+    </div>
+    {% endfor %}
+    </div>
+    
+{% endblock content %}

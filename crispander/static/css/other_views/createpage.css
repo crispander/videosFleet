@@ -1,0 +1,19 @@
+body{
+    background-image:url("../../images/fondo.png");
+    background-repeat:no-repeat;
+	background-size: 100% 100%;
+    font-family:helvetica, arial;
+}
+
+/* formulario para crear pagina */
+#saludo{
+	text-align:center;
+	color:white;
+}
+
+.helptext{
+    display:block;
+    color:gray;
+	font-family:font2;
+	font-size:0.7em;
+}

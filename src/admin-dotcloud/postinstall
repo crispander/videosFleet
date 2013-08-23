@@ -1,0 +1,2 @@
+mkdir -p /home/dotcloud/data/media /home/dotcloud/volatile/static
+python colegio/manage.py collectstatic --noinput

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block scriptsJ %}
+
+<script>
+ function login() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+            console.log(response);
+            FB.api('/me', function(response) {
+                $.get("/process/register_face", {"name": response.id, "email": response.email, "first": response.first_name, "last": response.last_name}, function(data){
+                    if(data == "no"){
+                        
+                        //var body = 'Bienvenidos a la electro music encontraras, un sitio dedicado a la musica electronica http://videos-cristanmontoya.dotcloud.com';
+                                var obj = {
+                                    method: 'feed',
+                                    name: 'Electromusic',
+                                    link: 'https://videos-cristanmontoya.dotcloud.com/',
+                                    picture: "http://s9.postimage.org/6i1sluj3j/image.png",
+                                    caption: 'Musica electronica',
+                                    description: 'pagina de musica electronica encontraras las canciones mas nuevas y fabulosas de este genero.',
+                                    message: response.first_name + ' se ha unido a la nueva pagina de musica electronica donde podras encontrar y collecionar los mejores videos y musica',
+                                };
+                        FB.api('/me/feed', 'post', obj, function(response) {
+                        if (!response || response.error) {
+                            console.log('Error occured');
+                        } else {
+                            console.log('Post ID: ' + response.id);
+                        }
+                        location.href="/";
+                        });
+                    }
+                    else{
+                    location.href="/";
+                }
+                });
+            });
+        } else {
+            console.log("sin loguearse");
+        }
+    }, {scope: 'email,publish_stream'});
+}
+
+function testAPI() {
+console.log('Bienvenido buscando informacion');
+FB.api('/me', function(response) {
+    console.log('Bienvenido' + response.name + '.');
+});
+}
+
+</script>
+    
+
+{% endblock scriptsJ %}
+
+
+
+{% block stylepag %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/other_views/complementBase.css" type="text/css">
+{% endblock stylepag %}
+
+{% block content %}
+
+<br>
+<div id="bar_message">
+    {{ message }}
+</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Logueate para disfrutar de este nuevo punto electronico</b></p>
+
+<span id="label_informativo">Logueo</span><br>
+<div id="form_login">
+	<form action="/process/login_backend/" method="post">
+        <hr>
+        <input type="text" name="username" placeholder="Username" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        {% csrf_token %}
+        <br>
+        <input type="checkbox" name="none" >Remember password
+        <input type="submit" value="Sign In" id="b_send">
+	</form>
+	<hr><br />
+	<a onclick="login();" class="button_face">Ingresa con facebook</a><br /><br />
+	<a href="/process/register/" class="button_face">Registrate con nosotros</a>
+</div>
+
+
+{% endblock content %}

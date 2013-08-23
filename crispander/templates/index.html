@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+
+{% block scriptsJ %}
+<!--
+    <script src="{{ STATIC_URL }}js/index.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/dateformat.js" type="text/javascript"></script>
+-->
+
+{% endblock scriptsJ %}
+
+{% block stylepag %}
+	<link href="{{ STATIC_URL }}css/home_new.css" rel="stylesheet" type="text/css"/>
+{% endblock stylepag %}
+
+{% block content %}
+
+<div id="block_info">
+	<h3>El Nuevo Estado de la Electrónica</h3>
+	<p>Un mundo nuevo donde encontraras la pasión de la era electronica,</p>
+	<p>comparte, coleciona, escucha, observa lo mejor y mas actual de el</p>
+	<p>techno, trance y otros generos electronicos.</p> 
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<a class="button_std" href="/home/feed/{{ user.id }}">Entrar</a>
+</div>
+
+{% endblock content %}

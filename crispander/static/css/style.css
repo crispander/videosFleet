@@ -1,0 +1,390 @@
+@import url("other_views/resources.css"); 
+
+/* prueba de fuentes */
+@font-face
+{
+font-family: font1;
+src: url('../fonts/Economica/Economica-Regular.ttf')
+}
+
+@font-face
+{
+font-family: font2;
+src: url('../fonts/Comfortaa/Comfortaa-Regular.ttf')
+}
+
+@font-face
+{
+font-family: font3;
+src: url('../fonts/Audiowide/Audiowide-Regular.ttf')
+}
+
+html, body{
+    margin:0;
+    padding:0px;
+    width:100%;
+    height:100%;
+}
+
+
+#all_content{
+    padding-top:10px;
+    margin:auto;
+    width:1140px;
+    position:relative;
+}
+
+#content_comment{
+    background-image:url('../images/opacity_font.png');
+    width:700px;
+    border:1px  solid gray;
+    box-shadow:0 0px 12px -2px white;
+    float:left;
+}
+
+/* calificacion de el video */
+
+#cal_video{
+    color:black;
+    width:65px;
+    float:right;
+}
+
+#toolsbar1, #toolsbar2, #toolsbar3, #toolsbar4, #toolsbar5, #toolsbar6, #selection1, #selection2, #selection3{
+    float:left;
+    position:relative;
+    width:60px;
+    height:60px;
+    padding:3px;
+    background-image:url("../images/new_icons.png");
+    background-repeat:no-repeat;
+    background-position:-3px 0px;
+    cursor:pointer;
+}
+
+#toolsbar1:hover{
+    background-position:-73px 0px;
+}
+
+#toolsbar2{
+    background-position:-3px -70px;
+}
+#toolsbar2:hover{
+    background-position:-73px -70px;
+}
+
+#toolsbar3{
+   background-position:-3px -140px;
+}
+#toolsbar3:hover{
+    background-position:-73px -140px;
+}
+
+#toolsbar4{
+   background-position:-3px -210px;
+}
+#toolsbar4:hover{
+   background-position:-73px -210px;
+}
+
+#toolsbar5{
+    background-position:-3px -280px;
+}
+#toolsbar5:hover{
+    background-position:-73px -280px;
+}
+
+
+#toolsbar6{
+    background-position:-3px -350px;
+}
+#toolsbar6:hover{
+    background-position:-73px -350px;
+}
+
+#cal_video #toolsbar6 > span, #cal_video #toolsbar5 > span{
+    opacity:0.4;
+    text-align:right;
+    font-weight:bolder;
+    font-size:0.5em;
+    font-weight:bolder;
+    padding:3px;
+    display:block;
+    position:absolute;
+    right:5px;
+    bottom:0;
+    width:80%;
+}
+/*contador de visitas*/
+#pag_head{
+    position:relative;
+}
+
+#pag_head #datepage{
+    margin-left:0px;
+    font-size:1.0em;
+    color:#3AA6D0;
+	float:left;
+}
+
+#pag_head #namepage{
+    margin-left:20px;
+    display:block;
+    overflow:hidden;
+    text-shadow: 1px 1px 10px #fff;
+    font-size:1.0em;
+}
+
+#pag_head .visitpage{
+    position:absolute;
+    bottom:20px;
+    right:4px;
+    font-size:1.1em;
+    margin-right:20px;
+    color:white;
+    font-weight:bolder;
+}
+
+#pag_head {
+    font-family: font2;
+    padding:10px;
+    text-align:left;
+    overflow:hidden;
+    
+}
+
+    /* iconos botones play, pause, stop*/
+#myPlay, #myStop, #myPause{
+    width:56px;
+    height:56px;
+    display:block;
+    float:left;
+    background-image:url("../images/botones_page.png");
+    background-repeat:no-repeat;
+    background-position:0 0;
+    cursor:pointer;
+    margin:15px 0 0 30px;
+}
+
+#myPlay:Hover{
+    background-position:-61px 0;
+}
+#myPlay:active{
+    background-position:-122px 0;
+}
+
+
+#myPause{
+    background-position:0 -65px;
+}
+#myPause:hover{
+    background-position:-61px -65px;
+}
+#myPause:active{
+    background-position:-122px -65px;
+}
+
+
+#myStop{
+    background-position:0 -130px;
+}
+#myStop:hover{
+    background-position:-61px -130px;
+}
+#myStop:active{
+    background-position:-122px -130px;
+}
+
+
+/* bloque de los comentarios principales*/
+#content_main{
+    width:300px;
+    height:390px;
+    padding:5px;
+    border:1px solid gray;
+    border-radius:4px;
+    overflow:auto;
+    background:#FFFFFF;
+    color:gray;
+}
+
+#content_main .blocks_main{
+    font-size:1.0em;
+    width:90%;
+    margin:10px 10px 40px 10px;
+    padding:5px;
+    float:left;
+    text-align:left;
+    overflow:hidden;
+}
+
+
+.cleaner{
+    clear:both;
+}
+
+#title_1{
+    border-bottom:2px dotted gray;
+    padding:3px;
+    width:50%;
+    margin:10px auto 10px auto;
+}
+
+
+/*zona de comentarios*/
+.layer_comentarios{
+    width:300px;
+    height:390px;
+}
+
+.block_comments{
+    max-height:300px;
+}
+
+/* contenedor scroll de las tres secciones */
+#three_section{
+    width:320px;
+    height:400px;
+    float:left;
+    margin:0 0 10px 10px;
+    overflow:hidden;
+}
+
+
+/* botones de seleccion */
+#buttons_selection{
+    float:left;
+    width:63px;
+    height:500px;
+    margin-left:2px;
+
+}
+
+#buttons_selection div{
+    margin-bottom:10px;
+}
+
+#selection1{
+    background-position:0px -420px;
+}
+#selection1:hover{
+    background-position:-70px -420px;
+}
+#selection1:active{
+    background-position:-141px -420px;
+}
+
+#selection2{
+    background-position:0px -490px;
+}
+#selection2:hover{
+    background-position:-70px -490px;
+}
+#selection2:active{
+    background-position:-141px -490px;
+}
+
+#selection3{
+    background-position:0px -560px;
+}
+#selection3:hover{
+    background-position:-70px -560px;
+}
+#selection3:active{
+    background-position:-141px -560px;
+}
+
+/* resources */
+
+.buttom{
+    font-family:font1;
+    font-size:1.0em;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+}
+
+.title{
+    color:#009999;
+}
+
+.cleaner{
+    clear:both;
+}
+
+/* information */
+
+#information #content_information{
+    text-align:left;
+    width:300px;
+    height:390px;
+    border:3px solid #898989;
+    padding:10px;
+    background:#ECECEC;
+    overflow:auto;
+    border-radius:7px;
+    font-size:1.2em;
+}
+
+#content_information h1{
+    border:4px solid #B7B7B7;
+    border-bottom:6px dotted #B7B7B7;
+    font-size:1.2em;
+    border-radius:7px;
+    background:#E5E5E5;
+    color:black;
+    text-align:right;
+    padding:4px;
+    width:60%;
+}
+
+#content_information pre{
+    border:1px solid black;
+    width:90%;
+    padding:10px;
+    background:white;
+    overflow:auto;
+    font-size:0.85em;
+}
+
+#content_information table {
+    border:1px solid black;
+    width:90%;
+    padding:10px;
+    background:white;
+    font-size:0.85em;
+}
+
+#content_information a{
+    color:navy;
+}
+
+#content_information p{
+    font-size:0.8em;
+}
+#content_information b{
+    font-family:arial;
+    color:red;
+}
+
+#edit_information textarea[id="data_information"]{
+    width:100%;
+    height:300px;
+}
+
+#edit_information {
+    display:none;
+}
+
+
+
+/* boton de paginacion */
+#pagination_button{
+    display:block;
+    padding:10px;
+    margin:auto;
+}
+
+.shadow{
+    box-shadow:0 0 10px 4px white;
+}

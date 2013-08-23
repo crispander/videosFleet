@@ -1,0 +1,97 @@
+
+.std_div{
+    background-color: #70d5ff;
+    border: 1px solid #0e0e57;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 1px #7aeeff;
+    -webkit-box-shadow: inset 0px 0px 1px #7aeeff;
+    box-shadow: inset 0px 0px 1px #7aeeff;
+    /*Inner elements should not cover inner shadows*/
+    /*Chrome renders inset shadows incorrectly with border-radius*/
+    /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr = '#24293e', endColorstr = '#7a8e9c');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr = '#24293e', endColorstr = '#7a8e9c')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    background-image: -moz-linear-gradient(left, #24293e, #7a8e9c);
+    background-image: -ms-linear-gradient(left, #24293e, #7a8e9c);
+    background-image: -o-linear-gradient(left, #24293e, #7a8e9c);
+    background-image: -webkit-gradient(linear, left top, right top, from(#24293e), to(#7a8e9c));
+    background-image: -webkit-linear-gradient(left, #24293e, #7a8e9c);
+    background-image: linear-gradient(left, #24293e, #7a8e9c);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    /*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+    /*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+
+
+}
+
+.std_div1{
+    background-color: #70d5ff;
+    border: 1px solid #69685f;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 1px #7aeeff;
+    -webkit-box-shadow: inset 0px 0px 1px #7aeeff;
+    box-shadow: inset 0px 0px 1px #7aeeff;
+    /*Inner elements should not cover inner shadows*/
+    /*Chrome renders inset shadows incorrectly with border-radius*/
+    /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fffade', endColorstr = '#a9a48a');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fffade', endColorstr = '#a9a48a')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    background-image: -moz-linear-gradient(top, #fffade, #a9a48a);
+    background-image: -ms-linear-gradient(top, #fffade, #a9a48a);
+    background-image: -o-linear-gradient(top, #fffade, #a9a48a);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#fffade), to(#a9a48a));
+    background-image: -webkit-linear-gradient(top, #fffade, #a9a48a);
+    background-image: linear-gradient(top, #fffade, #a9a48a);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    /*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+    /*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+
+}
+
+/*buttons */
+.mybottom {
+	-moz-box-shadow:inset 0px 1px 3px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #ffffff;
+	box-shadow:inset 0px 1px 3px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ebe6eb), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ebe6eb 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebe6eb', endColorstr='#dfdfdf');
+	background-color:#ebe6eb;
+	border:1px solid #bdbdbd;
+	display:inline-block;
+	color:#bda8bd;
+	font-family:arial;
+	font-size:14px;
+	font-weight:bold;
+	padding:7px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.mybottom:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ebe6eb) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ebe6eb 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ebe6eb');
+	background-color:#dfdfdf;
+}.mybottom:active {
+	position:relative;
+	top:1px;
+}

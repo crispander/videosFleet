@@ -1,0 +1,238 @@
+body,html{
+	font-family:calibri, verdana, arial;
+		background:white;
+	background-image:url(/static/images/fondo_index.png);
+	background-repeat:no-repeat;
+    background-size:100%;
+}
+
+#content_configuration{
+    float:leftt;
+    width:800px;
+    padding:10px;
+	margin-left:300px;
+	padding-bottom:500px;
+}
+
+#menu_configuration{
+    width:260px;
+    margin-left:15px;
+	position:fixed;
+	top:110px;
+}
+
+.button_config {
+	-moz-box-shadow:inset 0px 3px 0px -1px #97c4fe;
+	-webkit-box-shadow:inset 0px 3px 0px -1px #97c4fe;
+	box-shadow:inset 0px 3px 0px -1px #97c4fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	border:1px solid #337fed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:calibri, verdana, arial;
+	font-size:0.82em;
+    width:90%;
+    margin-top:4px;
+	cursor:pointer;
+	padding:6px 0;
+    padding-left:5px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #1570cd;
+}.button_config:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}.button_config:active {
+	position:relative;
+	top:1px;
+}
+
+.block_config{
+    min-height:200px;
+    border:1px solid gray;
+    width:100%;
+    margin-bottom:20px;
+	background-color:white;
+}
+
+/* CONTENT CONFIGUARATION */
+#config_image img{
+    display:block;
+    margin:10px auto;
+}
+
+#config_image .bloque{
+    float:left;
+    max-width:280px;
+    margin:5px;
+}
+
+.title_config{
+    display:block;
+    background:#1b9bff;
+    border-bottom:4px solid #000000;
+    padding:5px 0;
+    text-align:center;
+    margin:auto;
+    color:white;
+    font-size:0.8em;
+}
+
+.cleaner{
+    clear:both;
+}
+
+
+.boton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	box-shadow:inset 0px 1px 0px 0px #f5978e;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
+	background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
+	background-color:#f24537;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #d02718;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:0.8em;
+    cursor:pointer;
+	font-weight:bold;
+	padding:6px 20px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #810e05;
+}.boton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537) );
+	background:-moz-linear-gradient( center top, #c62d1f 5%, #f24537 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
+	background-color:#c62d1f;
+}.boton:active {
+	position:relative;
+	top:1px;
+}
+
+.progress-label {
+    float: left;
+    margin-left: 50%;
+    margin-top: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+
+/* form user */
+#registrousuario {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fcfcfc), color-stop(1, #d6d6d6) );
+    background:-moz-linear-gradient( center top, #fcfcfc 5%, #d6d6d6 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#d6d6d6');
+    background-color:#fcfcfc;
+    border:none !important;
+    color:#333333;
+    width:500px;
+    margin:auto;
+    padding:0 0 10px 0;
+}
+
+#registrousuario legend {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fab3ad;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fab3ad;
+	box-shadow:inset 0px 1px 0px 0px #fab3ad;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fa665a), color-stop(1, #d34639) );
+	background:-moz-linear-gradient( center top, #fa665a 5%, #d34639 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fa665a', endColorstr='#d34639');
+	background-color:#fa665a;
+	-moz-border-radius:6px 6px 0 0;
+	-webkit-border-radius:6px 6px 0 0;
+	border-radius:6px 6px 0 0;
+	border:1px solid #d83526;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:16px;
+	font-weight:bold;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #98231a;
+    padding-bottom:20px;
+    padding-top:8px;
+    text-transform:capitalize;
+    width:99%;
+    text-align:center;
+}
+
+#registrousuario input.texto {
+    background:#FFFFFF url(../images/bginputtexto.gif) no-repeat scroll left top;
+    border:medium none !important;
+    color:#666666;
+    font-size:12px;
+    height:24px;
+    padding-bottom:0;
+    padding-left:10px;
+    padding-top:5px;
+    width:454px;
+    margin-left:10px;
+    font-family:arial,sans-serif;
+}
+
+#registrousuario textarea.areadetexto {
+	width: 454px;
+	height: 212px;
+	border:none !important;
+	padding-bottom:0;
+	padding-left:5px;
+	padding-top:5px;
+	color:#666666;
+	font-size:12px;
+	margin-left:10px;
+	font-family:arial,sans-serif;
+	resize:none;
+}
+
+#registrousuario label {
+display:block;
+margin-left:10px;
+margin-bottom:5px;
+font-family:arial,sans-serif;
+font-size:14px;
+padding:10px 0 3px;
+}
+
+#registrousuario input.botonenviar {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a8a8a8), color-stop(1, #121212) );
+	background:-moz-linear-gradient( center top, #a8a8a8 5%, #121212 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a8a8a8', endColorstr='#121212');
+	background-color:#a8a8a8;
+    border:medium none !important;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+    color:#FFFFFF;
+    display:block;
+    float:left;
+    font-family:arial,sans-serif;
+    height:30px;
+    margin-left:360px;
+    margin-top:20px;
+    text-align:center;
+    width:99px;
+}
+
+#registrousuario .div_radio{
+    background:white;
+    padding:5px;
+    margin-left:10px;
+    font-size:0.9em;
+    font-family:arial;
+    width:454px;
+}
+
+#message_set_password{
+	text-align:center;
+	padding:20x;
+}
