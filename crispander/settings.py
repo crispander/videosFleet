@@ -6,7 +6,7 @@ settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 
 AUTH_PROFILE_MODULE = "accounts.UsersProfile"
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 #email settings
