@@ -2,7 +2,8 @@
 import os 
 SETTINGS_HOME = os.path.abspath(os.path.dirname(__file__))
 APP_HOME = os.path.split(SETTINGS_HOME)[0]
-PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+settings_dir = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 
 AUTH_PROFILE_MODULE = "accounts.UsersProfile"
 DEBUG = False
@@ -97,7 +98,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     # os.path.join(APP_HOME, 'crispander/static'),
-	os.path.join(PROJECT_PATH, 'static'),
+	os.path.join(PROJECT_ROOT, 'static'),
 )
 # List of finder classes that know how to find static files in
 # various locations.
