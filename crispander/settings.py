@@ -25,6 +25,13 @@ import dj_database_url
 
 DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGRESQL_BLACK_URL"])}
 
+# DATABASES = {
+    # 'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        # 'NAME': '{0}/db/bdone'.format(APP_HOME),                    # Or path to database file if using sqlite3.
+    # }
+# }
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -79,7 +86,7 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = 'staticfiles'
-#STATIC_ROOT = ''
+# STATIC_ROOT = 'static'
 #STATIC_ROOT = os.path.join(APP_HOME, '/static')
 
 # URL prefix for static files.
@@ -89,7 +96,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    #os.path.join(APP_HOME, 'crispander/static'),
+    # os.path.join(APP_HOME, 'crispander/static'),
 	os.path.join(PROJECT_PATH, 'static'),
 )
 # List of finder classes that know how to find static files in
