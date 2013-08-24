@@ -24,7 +24,7 @@ MANAGERS = ADMINS
 
 import dj_database_url
 
-DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGRESQL_BLUE_URL"])}
+DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGRESQL_BLACK_URL"])}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -117,7 +117,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
+    # Uncomment the next line for simple clickjacking protection:0ys5te
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
