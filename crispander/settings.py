@@ -1,6 +1,6 @@
 # Django settings for crispander project.
 import os
-# import dj_database_url
+import dj_database_url
  
 SETTINGS_HOME = os.path.abspath(os.path.dirname(__file__))
 APP_HOME = os.path.split(SETTINGS_HOME)[0]
