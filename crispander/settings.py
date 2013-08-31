@@ -1,5 +1,7 @@
 # Django settings for crispander project.
-import os 
+import os
+# import dj_database_url
+ 
 SETTINGS_HOME = os.path.abspath(os.path.dirname(__file__))
 APP_HOME = os.path.split(SETTINGS_HOME)[0]
 settings_dir = os.path.dirname(__file__)
@@ -8,7 +10,8 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 AUTH_PROFILE_MODULE = "accounts.UsersProfile"
-DEBUG = False
+DEBUG = True
+
 TEMPLATE_DEBUG = DEBUG
 
 #email settings
@@ -24,8 +27,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-import dj_database_url
-
 DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGRESQL_BLACK_URL"])}
 
 # DATABASES = {
@@ -34,12 +35,6 @@ DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGR
         # 'NAME': '{0}/db/bdone'.format(APP_HOME),                    # Or path to database file if using sqlite3.
     # }
 # }
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
 
 # DATABASES = {
     # 'default': {
@@ -100,7 +95,8 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     # os.path.join(APP_HOME, 'crispander/static'),
-	os.path.join(PROJECT_PATH, 'static'),
+	# os.path.join(PROJECT_ROOT, 'static'),
+	os.path.join(APP_HOME, 'static'),
 )
 # List of finder classes that know how to find static files in
 # various locations.
@@ -136,7 +132,7 @@ ROOT_URLCONF = 'crispander.urls'
 WSGI_APPLICATION = 'crispander.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(APP_HOME, 'crispander/templates'),
+    os.path.join(PROJECT_ROOT, 'crispander/templates'),
 )
 
 INSTALLED_APPS = (

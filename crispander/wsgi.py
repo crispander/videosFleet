@@ -13,12 +13,12 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-# import os
+import os
 
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crispander.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crispander.settings")
 
-# from django.core.wsgi import get_wsgi_application
-# application = get_wsgi_application()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
 
 #++++
 
