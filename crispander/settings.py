@@ -27,7 +27,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGRESQL_BLACK_URL"])}
+# DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGRESQL_BLACK_URL"])}
 
 # DATABASES = {
     # 'default': {
@@ -36,12 +36,12 @@ DATABASES = {'default': dj_database_url.config(default=os.environ["HEROKU_POSTGR
     # }
 # }
 
-# DATABASES = {
-    # 'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(APP_HOME, 'db/nothing.db'),
-    # }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(APP_HOME, 'db/nothing.db'),
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

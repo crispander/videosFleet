@@ -37,7 +37,7 @@ var current = "";
 var current_block = null;
 //gestor actual de datos youtube o vimeo
 var current_gst = true;
-var gestor_busquedas = "fleet";
+var gestor_busquedas = "youtube";
 
 function check(){
     if(current_block)toggle(false);
