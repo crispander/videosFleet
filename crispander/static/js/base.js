@@ -66,7 +66,7 @@ function mi_alerta_collect(e){
 		var name = $(this.parentNode).find(".data_name")[0].value;
 		
 		if($(this).attr("value") == "yes"){
-			var url = $(this.parentNode).find(".button_go_page")[0].href + "&type=ok";
+			var url = $(this.parentNode).find(".name_page")[0].href + "&type=ok";
 			$.ajax({
 				type:"GET",
 				url:url,

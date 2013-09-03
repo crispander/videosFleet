@@ -109,7 +109,12 @@
       </ul>
    </li>
    -->
-    <li><a href="/home/feed/{{ user.id }}/"><span class="icon-music">&nbsp;&nbsp;Entrar</span></a></li>
+   {% if user.is_authenticated %}
+   <li><a href="/home/feed/{{ user.id }}/"><span class="icon-music">&nbsp;&nbsp;Entrar</span></a></li>
+   {% else %}
+   <li><a href="/home/feed/1/"><span class="icon-music">&nbsp;&nbsp;Entrar</span></a></li>
+   {% endif %}
+    
 	<li><a href="/process/createpage/"><span class="icon-wrench">&nbsp;&nbsp;subir video o canción</span></a></li>
 	<li><a href="/process/createpage/"><span class="icon-stats">&nbsp;&nbsp;Primeros Puestos</span></a></li>
     <li><a href="/"><span class="icon-camera-2" style="font-size:1.6em;color:#FFF;">&nbsp;&nbsp;<b>ElectroComunity</b></span></a></li>
